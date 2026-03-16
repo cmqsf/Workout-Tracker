@@ -1,0 +1,177 @@
+{
+    "bsonType": "object", 
+    "required": ["workout"], 
+    "properties": {
+        "_id": {
+            "bsonType": "objectId", 
+            "description": "system generated"
+        }, 
+        "workout": {
+            "bsonType": "string", 
+            "enum": ["Deadlift", "Press", "Squat", "Other"],
+            "description": "The class of workout"
+        }, 
+        "deadlift": {
+            "bsonType": "object",
+            "properties": {
+                "type": {
+                    "bsonType": "string", 
+                    "enum": ["Conventional", 
+                             "Romanian", 
+                             "Sumo", 
+                             "Single-Leg Romanian", 
+                             "Stiff Leg", 
+                             "Snatch Grip"], 
+                    "description": "Type of deadlift"
+                }, 
+                "sets": {
+                    "bsonType": "int", 
+                    "description": "Number of sets"
+                }, 
+                "reps": {
+                    "bsonType": "int", 
+                    "description": "Number of (standard) reps per set"
+                }, 
+                "minWeight": {
+                    "bsonType": "double", 
+                    "description": "Minimum/starting weight"
+                },
+                "maxWeight": {
+                    "bsonType": "double", 
+                    "description": "Maximum/ending weight"
+                }, 
+                "amrap": {
+                    "bsonType": "object",
+                    "description": "Weight and reps if doing an amrap",
+                    "properties": {
+                        "weight": {
+                            "bsonType": "double"
+                        }, 
+                        "reps": {
+                            "bsonType": "int"
+                        }
+                    }
+                },
+                "pause": {
+                    "bsonType": "bool", 
+                    "description": "True if there is a pause in the motion"
+                }
+            }
+        }, 
+        "press": {
+            "bsonType": "object",
+            "description": "Details for presses",
+            "properties": {
+                "type": {
+                    "bsonType": "string", 
+                    "enum": ["Barbell Bench", 
+                             "Barbell Push", 
+                             "Barbell Strict", 
+                             "Dumbbell Push", 
+                             "Dumbbell Strict", 
+                             "Dumbbell Bench"]
+                }, 
+                "sets": {
+                    "bsonType": "int", 
+                    "description": "Number of sets"
+                }, 
+                "reps": {
+                    "bsonType": "int", 
+                    "description": "Number of (standard) reps per set"
+                }, 
+                "minWeight": {
+                    "bsonType": "double", 
+                    "description": "Minimum/starting weight"
+                },
+                "maxWeight": {
+                    "bsonType": "double", 
+                    "description": "Maximum/ending weight"
+                }, 
+                "amrap": {
+                    "bsonType": "object",
+                    "description": "Weight and reps if doing an amrap",
+                    "properties": {
+                        "weight": {
+                            "bsonType": "double"
+                        }, 
+                        "reps": {
+                            "bsonType": "int"
+                        }
+                    }
+                },
+                "pause": {
+                    "bsonType": "bool", 
+                    "description": "True if there is a pause in the motion"
+                }
+            }
+        },
+        "squat": {
+            "bsonType": "object",
+            "description": "Details for squats",
+            "properties": {
+                "type": {
+                    "bsonType": "string", 
+                    "enum": ["Back", 
+                             "Front", 
+                             "Single-Leg",
+                             "Goblet", 
+                             "Hip Thrust"]
+                },
+                "sets": {
+                    "bsonType": "int", 
+                    "description": "Number of sets"
+                }, 
+                "reps": {
+                    "bsonType": "int", 
+                    "description": "Number of (standard) reps per set"
+                }, 
+                "minWeight": {
+                    "bsonType": "double", 
+                    "description": "Minimum/starting weight"
+                },
+                "maxWeight": {
+                    "bsonType": "double", 
+                    "description": "Maximum/ending weight"
+                }, 
+                "amrap": {
+                    "bsonType": "object",
+                    "description": "Weight and reps if doing an amrap",
+                    "properties": {
+                        "weight": {
+                            "bsonType": "double"
+                        }, 
+                        "reps": {
+                            "bsonType": "int"
+                        }
+                    }
+                },
+                "pause": {
+                    "bsonType": "bool", 
+                    "description": "True if there is a pause in the motion"
+                }
+            }
+        },
+        "other": {
+            "bsonType": "object",
+            "description": "Details of other exercises",
+            "properties": {
+                "type": {
+                    "bsonType": "string"
+                }, 
+                "description": {
+                    "bsonType": "string", 
+                    "description": "Details of the other workout"
+                },
+                "weight": {
+                    "bsonType": "double"
+                },
+                "sets": {
+                    "bsonType": "int"
+                },
+                "reps": {
+                    "bsonType": "int"
+                }
+            }
+        }
+    }
+}

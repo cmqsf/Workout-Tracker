@@ -1,0 +1,161 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "basicInfo": {
+            "bsonType": "object",
+            "properties": {
+                
+                "fn": {
+                    "bsonType": "string",
+                    "description": "User first name"
+                },
+                "ln": {
+                    "bsonType": "string",
+                    "description": "User last name"
+                }, 
+                "age": {
+                    "bsonType": "int"
+                }, 
+                "birthday": {
+                    "bsonType": "string"
+                },
+                "weight": {
+                    "bsonType": "double",
+                    "description": "Weight in kilos"
+                },
+                "height": {
+                    "bsonType": "double",
+                    "description": "Height in cm"
+                },
+                "bmi": {
+                    "bsonType": "double"
+                }
+            }
+        },
+        "auth": {
+            "bsonType": "object",
+            "required": ["username"],
+            "properties": {
+                "username": {
+                    "bsonType": "string",
+                    "pattern": "^[a-zA-Z0-9_-]{3,20}$",
+                    "description": "Unique username of the user"
+                }, 
+                "email": {
+                    "bsonType": "string",
+                    "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                },
+                "password": {
+                    "bsonType": "string"
+                }
+            }
+        },
+        "workoutStats": {
+            "bsonType": "object",
+            "properties": {
+                "deadlifts": {
+                    "bsonType": "object",
+                    "properties": {
+                        "numWorkouts": {
+                            "bsonType": "int"
+                        }, 
+                        "pr": {
+                            "bsonType": "array", 
+                            "items": {
+                                "bsonType": "object",
+                                "properties": {
+                                    "conventional": {"bsonType": "double"},
+                                    "romanian": {"bsonType": "double"},
+                                    "sumo": {"bsonType": "double"},
+                                    "singleLegRomanian": {"bsonType": "double"},
+                                    "stiffLeg": {"bsonType": "double"},
+                                    "snatchGrip": {"bsonType": "double"},
+                                    "bStance": {"bsonType": "double"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "presses": {
+                    "bsonType": "object",
+                    "properties": {
+                        "numWorkouts": {
+                            "bsonType": "int"
+                        },
+                        "pr": {
+                            "bsonType": "array",
+                            "items": {
+                                "bsonType": "object",
+                                "properties": {
+                                    "bbBench": {"bsonType": "double"},
+                                    "bbStrict": {"bsonType": "double"},
+                                    "bbPush": {"bsonType": "double"},
+                                    "dbPush": {"bsonType": "double"},
+                                    "dbStrict": {"bsonType": ""}
+                                }
+                            }
+                        }
+                    }
+                },
+                "squats": {
+                    "bsonType": "object",
+                    "properties": {
+                        "numWorkouts": {
+                            "bsonType": "int"
+                        },
+                        "pr": {
+                            "bsonType": "array",
+                            "items": {
+                                "bsonType": "object",
+                                "properties": {
+                                    "back": {"bsonType": "double"},
+                                    "front": {"bsonType": "double"},
+                                    "singleLeg": {"bsonType": "double"},
+                                    "goblet": {"bsonType": "double"},
+                                    "hipThrust": {"bsonType": ""}
+                                }
+                            }
+                        }
+                    }
+                },
+                "cardio": {
+                    "bsonType": "object",
+                    "properties": {
+                        "run": {
+                            "bsonType": "object",
+                            "properties": {
+                                "avgTime": {"bsonType": "string"},
+                                "avgDistance": {"bsonType": "double"},
+                                "total": {"bsonType": "int"}
+                            }
+                        },
+                        "row": {
+                            "bsonType": "object",
+                            "properties": {
+                                "avgTime": {"bsonType": "string"},
+                                "avgDistance": {"bsonType": "double"},
+                                "total": {"bsonType": "int"}
+                            }
+                        },
+                        "hike": {
+                            "bsonType": "object",
+                            "properties": {
+                                "avgTime": {"bsonType": "string"},
+                                "avgDistance": {"bsonType": "double"},
+                                "total": {"bsonType": "int"}
+                            }
+                        },
+                        "walk": {
+                            "bsonType": "object",
+                            "properties": {
+                                "avgTime": {"bsonType": "string"},
+                                "avgDistance": {"bsonType": "double"},
+                                "total": {"bsonType": "int"}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

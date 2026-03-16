@@ -1,0 +1,25 @@
+{
+    "bsonType": "object",
+    "required": ["timestamp", "type"],
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "System generated"
+        }, 
+        "timestamp": {
+            "bsonType": "date"
+        },
+        "type": {
+            "bsonType": "string", 
+            "enum": ["Run", "Walk", "Row", "Hike"]
+        },
+        "distance": {
+            "bsonType": "double",
+            "description": "Distance in meters"
+        },
+        "time": {
+            "bsonType": "string",
+            "description": "How long the cardio took"
+        }
+    }
+}

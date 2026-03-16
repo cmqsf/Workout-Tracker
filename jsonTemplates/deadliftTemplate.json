@@ -1,0 +1,70 @@
+{
+    "bsonType": "object", 
+    "required": ["timestamp", "type", "sets", "reps", "maxWeight"],
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "System Generated"
+        }, 
+        "timestamp": {
+            "bsonType": "date",
+            "description": "Date of the workout"
+        },
+        "type": {
+            "bsonType": "string", 
+            "enum": ["Conventional", 
+                             "Romanian", 
+                             "Sumo", 
+                             "Single-Leg Romanian", 
+                             "Stiff Leg", 
+                             "Snatch Grip",
+                             "B-Stance"]
+        }, 
+        "sets": {
+            "bsonType": "int"
+        },
+        "reps": {
+            "bsonType": "int"
+        },
+        "minWeight": {
+            "bsonType": "double",
+            "description": "Minimum/starting weight"
+        }, 
+        "maxWeight": {
+            "bsonType": "double",
+            "description": "Maximum/ending weight"
+        }, 
+        "allWeights": {
+            "bsonType": "array",
+            "description": "Array of weights for each set (if progressive)",
+            "maxItems": 10,
+            "items": {
+                "bsonType": "double"
+            }
+        },
+        "amrap": {
+            "bsonType": "object",
+            "description": "Weight and reps if doing an amrap",
+            "properties": {
+                "weight": {
+                    "bsonType": "double"
+                },
+                "reps": {
+                    "bsonType": "int"
+                }
+            }
+        },
+        "pause": {
+            "bsonType": "bool",
+            "description": "True if there is a pause in the action"
+        },
+        "estimatedRPE": {
+            "bsonType": "double",
+            "description": "The estimated RPE of the workout"
+        },
+        "pr": {
+            "bsonType": "bool",
+            "description": "True if the weight counts as a personal record/max weight"
+        }
+    }
+}

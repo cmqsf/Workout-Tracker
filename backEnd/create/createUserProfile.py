@@ -9,7 +9,7 @@ from typing import Annotated
 from contextlib import asynccontextmanager
 
 from data.mongo import get_users_coll
-from ..create.createTemplate import NewUser
+from create.createTemplate import NewUser
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)

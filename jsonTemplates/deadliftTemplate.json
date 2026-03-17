@@ -26,20 +26,25 @@
         "reps": {
             "bsonType": "int"
         },
-        "minWeight": {
-            "bsonType": "double",
-            "description": "Minimum/starting weight"
-        }, 
-        "maxWeight": {
-            "bsonType": "double",
-            "description": "Maximum/ending weight"
-        }, 
-        "allWeights": {
-            "bsonType": "array",
-            "description": "Array of weights for each set (if progressive)",
-            "maxItems": 10,
-            "items": {
-                "bsonType": "double"
+        "weights": {
+            "bsonType": "object", 
+            "properties": {
+                "minWeight": {
+                    "bsonType": "double",
+                    "description": "Minimum/starting weight"
+                }, 
+                "maxWeight": {
+                    "bsonType": "double",
+                    "description": "Maximum/ending weight"
+                }, 
+                "allWeights": {
+                    "bsonType": "array",
+                    "description": "Array of weights for each set (if progressive)",
+                    "maxItems": 10,
+                    "items": {
+                        "bsonType": "double"
+                    }
+                }
             }
         },
         "amrap": {

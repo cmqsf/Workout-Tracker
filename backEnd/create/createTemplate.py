@@ -2,6 +2,11 @@
 from typing import Optional, List, Dict, Union
 from typing_extensions import Literal
 from pydantic import BaseModel
+from datetime import date
+import logging
+
+logging.basicConfig(level = logging.INFO)
+logger = logging.getLogger(__name__)
 
 DeadliftType = Union[
     Literal[
@@ -47,16 +52,17 @@ CardioType = Union[
 
 class LiftInfo(BaseModel): 
     username: str
-    timestamp: str
+    day: int
+    month: int
+    year: int
     sets: int
     reps: int
-    minWeight: Optional[float] = 0.0
+    minWeight: Optional[float] = None
     maxWeight: float
     allWeights: Optional[List[float]] = []
     amrap: Optional[Dict[str, Union[int, float]]] = {}
     pause: Optional[bool] = False
-    estimatedRPE: Optional[float] = 0.0
-    pr: Optional[bool] = False
+    estimatedRPE: Optional[float] = None
 
 class Deadlift(LiftInfo): 
     type: DeadliftType
@@ -69,7 +75,9 @@ class Squat(LiftInfo):
 
 class Cardio(BaseModel): 
     username: str
-    timestamp: str
+    day: int
+    month: int
+    year: int
     type: CardioType
     distance: Optional[float] = 0.0
     hours: Optional[int] = 0
@@ -79,7 +87,9 @@ class Cardio(BaseModel):
 class Other(BaseModel): 
     username: str
     type: str
-    timestamp: str
+    day: int
+    month: int
+    year: int
     details: Optional[str] = None
     weight: Optional[float] = 0.0
     sets: Optional[int] = 0
@@ -96,3 +106,41 @@ class User(BaseModel):
     height: Optional[float] = None
     email: Optional[str] = None
     password: Optional[str] = None
+
+def populateWorkout(request: LiftInfo): 
+
+    try: 
+        
+        timestamp = date(request.year, request.month, request.day)
+        weights = {
+            "minWeight": request.minWeight,
+            "maxWeight": request.maxWeight,
+            "allWeights": request.allWeights
+        }
+
+        if not request.minWeight: 
+            del weights['minWeight']
+
+        if not request.allWeights: 
+            del weights['allWeights']
+        
+        workout = {
+            "timestamp": timestamp,
+            "sets": request.sets,
+            "reps": request.reps,
+            "weights": weights,
+            "amrap": request.amrap,
+            "pause": request.pause,
+            "estimatedRPE": request.estimatedRPE
+        }
+
+        if not request.amrap: 
+            del workout['amrap']
+
+        if not request.estimatedRPE: 
+            del workout['estimatedRPE']
+
+        return workout
+
+    except Exception as e: 
+        logger.error(f"Error populating workout: {e}")

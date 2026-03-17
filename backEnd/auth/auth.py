@@ -30,16 +30,20 @@ async def router_lifespan(app: APIRouter):
 
 router = APIRouter(lifespan=router_lifespan)
 
+class Login: 
+    username: str
+    password: str
+
 @router.post("/login")
-def login(username: str, password: str): 
+def login(credentials: Login): 
 
     try: 
 
-        user = coll.find_one({"auth.username": username})
+        user = coll.find_one({"auth.username": credentials.username})
         if not user: 
-            raise HTTPException(status_code=404, detail=f"User {username} not found.")
+            raise HTTPException(status_code=404, detail=f"User {credentials.username} not found.")
         
-        if password != user['auth'].get('password'): 
+        if credentials.password != user['auth'].get('password'): 
             raise HTTPException(status_code=401, detail=f"Password is incorrect.")
         
         return True

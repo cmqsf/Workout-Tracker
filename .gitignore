@@ -1,0 +1,6 @@
+.env
+.DS_Store
+jupyter_files/
+venv/
+__pycache__/
+config.ps1

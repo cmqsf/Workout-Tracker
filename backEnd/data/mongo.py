@@ -64,10 +64,10 @@ def get_users_coll():
         if client is None: 
             client = get_client()
 
-            collection = client[users_db_name][users_coll_name]
-            logger.info(f"Accessed collection: {users_coll_name}")
+        collection = client[users_db_name][users_coll_name]
+        logger.info(f"Accessed collection: {users_coll_name}")
 
-            return collection
+        return collection
         
     except errors.ServerSelectionTimeoutError as Argument:
         logger.error(f"MongoDB not reachable: {Argument}")

@@ -1,7 +1,8 @@
 # Workout Tracker
 
 ### Purpose of the project
-The primary goal is to flex some of my backend skills, specifically skills related to building apis and using MongoDB.  
+The primary goal is to flex some of my backend skills, specifically skills related to building apis and using MongoDB.
+   
 The secondary goal is to continue learning frontend skills, including (hopefully): 
 - React
 - Forms

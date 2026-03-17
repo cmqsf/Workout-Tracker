@@ -85,10 +85,14 @@ class Other(BaseModel):
     sets: Optional[int] = 0
     reps: Optional[int] = 0
 
-class NewUser(BaseModel): 
+class User(BaseModel): 
     username: str
-    fn: str
+    fn: Optional[str] = None
     ln: Optional[str] = None
-    birthday: Optional[str] = None
-    weight: Optional[float] = 0.0
-    height: Optional[float] = 0.0 
+    birthYear: Optional[int] = None
+    birthMonth: Optional[int] = None
+    birthDay: Optional[int] = None
+    weight: Optional[float] = None
+    height: Optional[float] = None
+    email: Optional[str] = None
+    password: Optional[str] = None

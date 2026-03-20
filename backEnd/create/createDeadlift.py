@@ -42,7 +42,7 @@ def createDeadlift(request: Deadlift):
             raise HTTPException(status_code=404, detail="User not found")
     
         workout['type'] = request.type
-        workout['pr'] = determinePR(user, request.type, request.maxWeight)
+        workout['pr'] = determinePR(user, str(request.type), request.maxWeight)
 
         coll = get_collection(request.username, coll_name)
         coll.insert_one(workout)
@@ -52,5 +52,5 @@ def createDeadlift(request: Deadlift):
         return "Successfully entered workout!"
 
     except Exception as e: 
-        logger.error(f"Error populating deadlift workout: {e}")
+        logger.error(f"Error creating deadlift workout: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")

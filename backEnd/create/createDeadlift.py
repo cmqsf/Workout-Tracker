@@ -7,7 +7,7 @@ from fastapi import APIRouter, HTTPException
 from contextlib import asynccontextmanager
 
 from data.mongo import get_collection, get_users_coll
-from create.createTemplate import DeadliftType, Deadlift, populateWorkout, LiftInfo
+from create.createTemplate import *
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
@@ -32,31 +32,22 @@ def createDeadlift(request: Deadlift):
     try: 
         liftInfo = LiftInfo(**request.model_dump(exclude={'type'}))
         workout = populateWorkout(liftInfo)
-        if workout is None: 
-            raise HTTPException(status_code=500, detail="Internal Server Error")
-        
-        workout['type'] = request.type
-
         user = users.find_one({"auth.username": request.username})
+
+        ## Avoiding those annoying squiggly lines
+        if workout is None: 
+            return HTTPException(status_code=500, detail=f"Internal Server Error: workout not created")
+        
         if user is None: 
             raise HTTPException(status_code=404, detail="User not found")
-        
-        user_stats = user.get("workoutStats")
-        if user_stats: 
-            deadlift_stats = user_stats.get("deadlifts", {})
-
-        if deadlift_stats: 
-            prs = deadlift_stats.get("pr", [])
-
-        if prs and isinstance(prs, dict): 
-            pr = prs.get(request.type.replace("-", "").replace(" ", "").lower(), 0.0)
-
-        workout['pr'] = False
-        if request.maxWeight > pr: 
-            workout['pr'] = True
+    
+        workout['type'] = request.type
+        workout['pr'] = determinePR(user, request.type, request.maxWeight)
 
         coll = get_collection(request.username, coll_name)
         coll.insert_one(workout)
+
+        ## Updating user workoutStats I think would be best done as a decorator
 
         return "Successfully entered workout!"
 

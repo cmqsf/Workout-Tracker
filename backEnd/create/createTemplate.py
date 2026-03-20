@@ -4,6 +4,7 @@ from typing_extensions import Literal
 from pydantic import BaseModel
 from datetime import date
 import logging
+from fastapi import HTTPException
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
@@ -125,7 +126,7 @@ def populateWorkout(request: LiftInfo):
             del weights['allWeights']
         
         workout = {
-            "timestamp": timestamp,
+            "timestamp": str(timestamp),
             "sets": request.sets,
             "reps": request.reps,
             "weights": weights,
@@ -144,3 +145,29 @@ def populateWorkout(request: LiftInfo):
 
     except Exception as e: 
         logger.error(f"Error populating workout: {e}")
+
+def determinePR(user: dict, type: str, maxWeight: float): 
+
+    try: 
+        user_stats = user.get("workoutStats")
+        deadlift_stats = {}
+        if user_stats: 
+            deadlift_stats = user_stats.get("deadlifts", {})
+
+        prs = []
+        if deadlift_stats:
+            prs = deadlift_stats.get("pr", [])
+
+        pr = 0.0
+        if prs and isinstance(prs, dict): 
+            pr = prs.get(type.replace("-", "").replace(" ", "").lower(), 0.0)
+
+        isPR = False
+        if maxWeight > pr:
+            isPR = True
+
+        return isPR
+    
+    except Exception as e: 
+        logger.error(f"Error determining PR: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")

@@ -11,7 +11,7 @@ import json
 import pymongo
 
 from fastapi import Form, APIRouter, HTTPException
-from typing import Annotated
+from pydantic import BaseModel
 from contextlib import asynccontextmanager
 
 from data.mongo import get_users_coll
@@ -30,7 +30,7 @@ async def router_lifespan(app: APIRouter):
 
 router = APIRouter(lifespan=router_lifespan)
 
-class Login: 
+class Login(BaseModel): 
     username: str
     password: str
 
@@ -46,7 +46,7 @@ def login(credentials: Login):
         if credentials.password != user['auth'].get('password'): 
             raise HTTPException(status_code=401, detail=f"Password is incorrect.")
         
-        return True
+        return user
     
     except Exception as e: 
         logger.error(e)

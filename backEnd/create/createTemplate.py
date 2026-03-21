@@ -14,8 +14,8 @@ DeadliftType = Union[
         "Conventional",
         "Romanian",
         "Sumo", 
-        "Single-Leg Romanian",
-        "B-Stance",
+        "Single Leg Romanian",
+        "B Stance",
         "Stiff Leg",
         "Snatch Grip"
     ]
@@ -171,3 +171,25 @@ def determinePR(user: dict, type: str, maxWeight: float):
     except Exception as e: 
         logger.error(f"Error determining PR: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+
+def normalizeType(liftType: list) -> str: 
+
+    try: 
+        if len(liftType) == 1: 
+            lt = liftType[0]
+        else: 
+            first = liftType[0]
+            liftType.pop(0)
+            if len(liftType) == 1: 
+                lt = "".join(first + liftType[0].title())
+            else:
+                newLiftType = []
+                for l in liftType: 
+                    newLiftType.append(l.title())
+                lt = "".join(first+"".join(newLiftType))  
+
+        return lt
+
+    except Exception as e: 
+        logger.error(f"Error normalizing lift type.")
+        return ""

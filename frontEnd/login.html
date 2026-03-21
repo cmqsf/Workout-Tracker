@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="/css/main-elements.css">
+    </head>
+    <body>
+        <div id="error-message" style="display:none; color:yellow;">
+            Invalid username or password.
+        </div>
+        <input type="text" id="username" placeholder="Username"/>
+        <input type="password" id="password" placeholder="Password"/>
+        <button onclick="handleLogin()">
+            Log In
+        </button>
+
+        <script>
+            async function handleLogin() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                const response = await fetch ("/login", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({username, password})
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem("token", data.token); 
+                    window.location.href = "/";
+                } else {
+                    document.getElementById("error-message").style.display = "block";
+                }
+            }
+        </script>
+    </body>
+</html>

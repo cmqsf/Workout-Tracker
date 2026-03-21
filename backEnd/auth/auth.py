@@ -6,9 +6,6 @@
 
 import logging
 import os
-from datetime import date
-import json
-import pymongo
 
 from fastapi import Form, APIRouter, HTTPException
 from pydantic import BaseModel
@@ -16,6 +13,7 @@ from contextlib import asynccontextmanager
 
 from data.mongo import get_users_coll
 from create.createTemplate import User
+from auth.jwt import verify_password, create_access_token
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
@@ -35,7 +33,7 @@ class Login(BaseModel):
     password: str
 
 @router.post("/login")
-def login(credentials: Login): 
+async def login(credentials: Login): 
 
     try: 
 
@@ -46,7 +44,9 @@ def login(credentials: Login):
         if credentials.password != user['auth'].get('password'): 
             raise HTTPException(status_code=401, detail=f"Password is incorrect.")
         
-        return user
+        token = create_access_token({"sub": credentials.username})
+
+        return {"token": token}
     
     except Exception as e: 
         logger.error(e)

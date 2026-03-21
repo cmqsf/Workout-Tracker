@@ -41,12 +41,15 @@ async def login(credentials: Login):
         if not user: 
             raise HTTPException(status_code=404, detail=f"User {credentials.username} not found.")
         
-        if credentials.password != user['auth'].get('password'): 
-            raise HTTPException(status_code=401, detail=f"Password is incorrect.")
+        if not verify_password(credentials.password, user['auth'].get("password")): 
+            raise HTTPException(status_code=401, detail="Incorrect password")
         
         token = create_access_token({"sub": credentials.username})
 
         return {"token": token}
+    
+    except HTTPException:
+        raise
     
     except Exception as e: 
         logger.error(e)

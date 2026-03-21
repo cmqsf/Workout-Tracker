@@ -2,24 +2,17 @@
 import logging
 import os
 from datetime import date
-import json
-import pymongo
-from deepdiff import DeepDiff
 
-from fastapi import Form, APIRouter, HTTPException
-from typing import Annotated
+from fastapi import APIRouter, HTTPException
 from contextlib import asynccontextmanager
+
+from auth.jwt import hash_password
 
 from data.mongo import get_users_coll
 from create.createTemplate import User
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
-
-try: 
-    users_db = os.environ["MONGO_USERS_DB_NAME"]
-except Exception as e: 
-    logger.error(f"Error loading env variables: {e}")
 
 coll = get_users_coll()
 
@@ -64,7 +57,7 @@ def populateUser(request):
             "auth": {
                 "username": request.username,
                 "email": request.email,
-                "password": request.password
+                "password": hash_password(request.password)
             }
         }
         return user

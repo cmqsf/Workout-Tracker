@@ -2,13 +2,17 @@ import functools
 from data.mongo import get_users_coll
 from create.createTemplate import normalizeType
 import logging
+from typing import Callable, TypeVar, cast
+from fastapi import Response
+
+F = TypeVar("F", bound=Callable)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 coll = get_users_coll()
 
-def updateDLStats(createPress): 
+def updateDLStats(createPress: F) -> F: 
 
     @functools.wraps(createPress)
     def wrapper(*args, **kwargs): 
@@ -55,5 +59,6 @@ def updateDLStats(createPress):
 
         except Exception as e: 
             logger.error(f"Could not update user stats: {e}")
+            return createPress(*args, **kwargs)
 
-        return wrapper
+    return cast(F, wrapper)

@@ -2,13 +2,17 @@ import functools
 from data.mongo import get_users_coll
 from create.createTemplate import normalizeType
 import logging
+from typing import Callable, TypeVar, cast
+from fastapi import Response
+
+F = TypeVar("F", bound=Callable)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 coll = get_users_coll()
 
-def updateDLStats(createDeadlift): 
+def updateDLStats(createDeadlift: F) -> F: 
 
     @functools.wraps(createDeadlift)
     def wrapper(*args, **kwargs): 
@@ -28,14 +32,9 @@ def updateDLStats(createDeadlift):
                 return createDeadlift(*args, **kwargs)
             
             workoutStats = user.get('workoutStats')
-            if not workoutStats: 
-                pass
-
             deadliftStats = workoutStats.get("numWorkouts")
-            if not deadliftStats: 
-                pass
-
             currentNumWorkouts = deadliftStats.get('numWorkouts', 0)
+
             if isinstance(currentNumWorkouts, int):
                 update_fields["numWorkouts"] = currentNumWorkouts + 1
 
@@ -55,5 +54,6 @@ def updateDLStats(createDeadlift):
 
         except Exception as e: 
             logger.error(f"Could not update user stats: {e}")
+            return createDeadlift(*args, **kwargs)
 
-        return wrapper
+    return cast(F, wrapper)

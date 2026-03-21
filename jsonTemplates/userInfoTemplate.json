@@ -60,18 +60,15 @@
                             "bsonType": "int"
                         }, 
                         "pr": {
-                            "bsonType": "array", 
-                            "items": {
-                                "bsonType": "object",
-                                "properties": {
-                                    "conventional": {"bsonType": "double"},
-                                    "romanian": {"bsonType": "double"},
-                                    "sumo": {"bsonType": "double"},
-                                    "singleLegRomanian": {"bsonType": "double"},
-                                    "stiffLeg": {"bsonType": "double"},
-                                    "snatchGrip": {"bsonType": "double"},
-                                    "bStance": {"bsonType": "double"}
-                                }
+                            "bsonType": "object", 
+                            "properties": {
+                                "conventional": {"bsonType": "double"},
+                                "romanian": {"bsonType": "double"},
+                                "sumo": {"bsonType": "double"},
+                                "singleLegRomanian": {"bsonType": "double"},
+                                "stiffLeg": {"bsonType": "double"},
+                                "snatchGrip": {"bsonType": "double"},
+                                "bStance": {"bsonType": "double"}
                             }
                         }
                     }

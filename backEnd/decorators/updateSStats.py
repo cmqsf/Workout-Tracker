@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 coll = get_users_coll()
 
-def updateDLStats(createSquat: F) -> F: 
+def updateStats(createSquat: F) -> F: 
 
     @functools.wraps(createSquat)
     def wrapper(*args, **kwargs): 

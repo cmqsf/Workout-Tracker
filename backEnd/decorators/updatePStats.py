@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 coll = get_users_coll()
 
-def updateDLStats(createPress: F) -> F: 
+def updateStats(createPress: F) -> F: 
 
     @functools.wraps(createPress)
     def wrapper(*args, **kwargs): 

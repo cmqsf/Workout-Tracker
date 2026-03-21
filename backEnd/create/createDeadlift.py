@@ -4,10 +4,12 @@ import os
 from datetime import date
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
 from data.mongo import get_collection, get_users_coll
 from create.createTemplate import *
+from decorators.updateDLStats import updateStats
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
@@ -28,6 +30,7 @@ async def router_lifespan(app: APIRouter):
 router = APIRouter(lifespan=router_lifespan)
 
 @router.post("/deadlift")
+@updateStats
 def createDeadlift(request: Deadlift): 
     try: 
         liftInfo = LiftInfo(**request.model_dump(exclude={'type'}))

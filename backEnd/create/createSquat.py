@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 
 from data.mongo import get_collection, get_users_coll
 from create.createTemplate import *
+from decorators.updateSStats import updateStats
 
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
@@ -28,6 +29,7 @@ async def router_lifespan(app: APIRouter):
 router = APIRouter(lifespan=router_lifespan)
 
 @router.post("/squat")
+@updateStats
 def createSquat(request: Squat): 
     try: 
         liftInfo = LiftInfo(**request.model_dump(exclude={'type'}))

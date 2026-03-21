@@ -41,7 +41,12 @@ def updateDLStats(createDeadlift):
 
             dlType = normalizeType(request.type.split(" "))
 
-            update_fields["pr"][dlType] = request.maxWeight   
+            allPrs = deadliftStats.get("pr")
+            if not allPrs: 
+                pass
+            pr = allPrs.get(dlType)
+            if request.maxWeight > pr:
+                update_fields["deadlifts"]["pr"][dlType] = request.maxWeight   
 
             coll.update_one(filter, {"$set": update_fields})
             logger.info("Successfully updated user stats!") 

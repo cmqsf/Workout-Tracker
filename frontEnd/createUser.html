@@ -23,24 +23,30 @@
                 <h1 id="home-header">Workout Tracker</h1>
             </a>
         </header>
-        <div id="error-message" style="display:none; color:rgb(255, 174, 0);">
+        <div id="error-message" style="display:none; color:rgb(255, 174, 0); font-family: Gruppo, sans-serif;">
             Something went wrong.
         </div>
 
         <div id="create-user-form">
-            <div id="auth-box">
+            <div id="basic-info">
+                <p style="text-align: center">Enter name and email</p>
+                <input type="text" id="fn" placeholder="First Name" required/>
+                <input type="text" id="ln" placeholder="Last Name"/>
                 <input type="text" id="email" placeholder="Email" required/>
+            </div>
+            <div id="auth-box">
+                <p style="text-align: center;">Create username and password</p>
                 <input type="text" id="username" placeholder="Username" required/>
                 <input type="password" id="password" placeholder="Password" required/>
             </div>
-            <div id="basic-info">
-                <input type="text" id="fn" placeholder="First Name" required/>
-                <input type="text" id="ln" placeholder="Last Name"/>
+            <div id="birthday">
+                <p style="text-align: center;">Enter birthday</p>
                 <input type="number" id="year" step="1" placeholder="Birth Year" required/>
                 <input type="number" id="month" step="1" placeholder="Birth Month" min="1" max="12" required/>
                 <input type="number" id="day" step="1" placeholder="Birth Day" min="1" max="31" required/>
             </div>
             <div id="optional-info">
+                <p style="text-align: center;">If you'd like, enter your current weight and height</p>
                 <input type="number" id="height" placeholder="Height in cms"/>
                 <input type="number" id="weight" placeholder="Weight in kgs"/>
             </div>

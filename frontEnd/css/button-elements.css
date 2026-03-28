@@ -13,4 +13,12 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 200px;
+}
+
+#logged-in-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }

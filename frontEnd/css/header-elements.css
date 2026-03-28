@@ -16,3 +16,16 @@ header h1 {
     color: #9925a3;
     text-align: center;
 }
+
+header h2 {
+    font-family: 'Bitcount Prop Single Ink', sans-serif;
+    font-size: 36px;
+    text-align: center;
+}
+
+#greeting {
+    font-family: 'Bitcount Prop Single Ink', sans-serif;
+    font-size: 42px;
+    text-align: center;
+    color: #9925a3;
+}

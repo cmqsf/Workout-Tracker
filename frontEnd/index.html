@@ -15,6 +15,7 @@
         <link rel="stylesheet" href = "/css/main-elements.css">
         <link rel="stylesheet" href = "/css/header-elements.css">
         <link rel="stylesheet" href = "/css/button-elements.css">
+        
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -23,7 +24,7 @@
     </head>
 
     <body>
-        <header>
+        <header id = "main-header">
             <a href="/" style="text-decoration: none; color: inherit">
                 <h1 id="home-header">Workout Tracker</h1>
             </a>
@@ -40,11 +41,18 @@
                 </button>
             </div>
 
-            <div id="greeting" style="display: none;"></div>
-
+            <h1 id="greeting" style="display: none;"></h1>
+            <script>
+                function logout() {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("fn");
+                    window.location.href = "/";
+                }
+            </script>
             <div id="logged-in-options" style="display:none;">
                 <button>Log a Workout</button>
                 <button>View My Stats</button>
+                <button onclick="logout()">Log Out</button>
             </div>
             <script>
                 function isTokenExpired(token) {
@@ -54,6 +62,7 @@
 
                 const token = localStorage.getItem("token")
                 if (token && !isTokenExpired(token)) {
+                    document.getElementById("main-header").style.display = "none";
                     document.getElementById("logged-in-options").style.display = "block";
                     document.getElementById("login-button").style.display = "none";
                     document.getElementById("get-started").style.display = "none"; 
@@ -67,9 +76,7 @@
                         localStorage.removeItem("token");
                         localStorage.removeItem("fn");
                     }
-                } else {
-                    window.location.href = "login.html";
-                }
+                } 
 
             </script>
         </main>

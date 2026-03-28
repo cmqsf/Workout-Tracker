@@ -35,10 +35,15 @@ def populateUser(request):
 
     try: 
 
-        age = ((date.today() - date(request.birthYear, request.birthMonth, request.birthDay)).days)//365.25
-        birthday = request.birthYear
+        birthday = None
+        age = None
         if request.birthMonth and request.birthDay:
             birthday = f"{request.birthDay}.{request.birthMonth}.{request.birthYear}"
+            str_age = ((date.today() - date(request.birthYear, request.birthMonth, request.birthDay)).days)//365.25
+            age = int(str_age)
+        elif not (request.birthMonth or request.birthDay) and request.birthYear:
+            birthday = request.birthYear
+            age = date.today().year - birthday
 
         bmi = None
         if request.weight and request.height: 
@@ -48,7 +53,7 @@ def populateUser(request):
             "basicInfo": {
                 "fn": request.fn,
                 "ln": request.ln,
-                "age": int(age),
+                "age": age,
                 "birthday": birthday,
                 "weight": request.weight,
                 "height": request.height,

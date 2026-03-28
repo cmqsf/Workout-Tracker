@@ -6,9 +6,9 @@ async function createUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const year = parseInt(document.getElementById("year").value);
-    const month = parseInt(document.getElementById("month").value);
-    const day = parseInt(document.getElementById("day").value);
+    const birthYear = parseInt(document.getElementById("year").value);
+    const birthMonth = parseInt(document.getElementById("month").value);
+    const birthDay = parseInt(document.getElementById("day").value);
 
     const weight = parseFloat(document.getElementById("weight").value);
     const height = parseFloat(document.getElementById("height").value);
@@ -19,9 +19,9 @@ async function createUser() {
         ln,
         email,
         password,
-        year, 
-        month,
-        day, 
+        birthYear, 
+        birthMonth,
+        birthDay, 
         weight,
         height
     })

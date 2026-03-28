@@ -12,8 +12,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gruppo&display=swap" rel="stylesheet">
 
         <!-- Link to css -->
-         <link rel="stylesheet" href = "/css/main-elements.css">
+        <link rel="stylesheet" href = "/css/main-elements.css">
         <link rel="stylesheet" href = "/css/header-elements.css">
+        <link rel="stylesheet" href = "/css/button-elements.css">
     </head>
 
     <body>
@@ -22,6 +23,28 @@
                 <h1 id="home-header">Workout Tracker</h1>
             </a>
         </header>
+        <main>
+            <div id="login-button">
+                <button onclick="window.location.href='login.html'">
+                    <strong>Log In</strong>
+                </button>
+            </div>
+            <div id="get-started">
+                <button onclick="window.location.href='createUser.html'">
+                    <strong>Get Started</strong>
+                </button>
+            </div>
+            <div id="logged-in-options" style="display:none;">
+                <button>Log a Workout</button>
+                <button>View My Stats</button>
+            </div>
+            <script>
+                const token = localStorage.getItem("token")
+                if (token) {
+                    document.getElementById("logged-in-options").style.display = "block";
+                }
+            </script>
+        </main>
     </body>
 </html>
 

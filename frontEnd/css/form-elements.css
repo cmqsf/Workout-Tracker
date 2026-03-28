@@ -1,0 +1,33 @@
+#login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-box input {
+    text-align: center;
+    width: 240px;
+    height: 30px;
+    background-color: #282828;
+    color: #e08ee7;
+    font-family: 'Gruppo', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#userInput::placeholder {
+    text-align: center;
+    color: #eec1f2;
+    transition: opacity 0.2 ease;
+}
+
+#userInput:focus::placeholder {
+    opacity: 0;
+}
+
+#userInput:placeholder-shown {
+    text-align: center;
+    background-color: #282828;
+    color: #e08ee7; 
+    font-family: 'Gruppo', sans-serif;
+}

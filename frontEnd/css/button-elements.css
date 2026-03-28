@@ -1,0 +1,16 @@
+button {
+    background-color: #e08ee7;
+    border: #e08ee7;
+    color: #282828;
+    padding: 20px 20px;
+    font-family: 'Gruppo', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

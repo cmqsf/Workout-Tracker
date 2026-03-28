@@ -26,23 +26,26 @@
         <div id="error-message" style="display:none; color:rgb(255, 174, 0);">
             Something went wrong.
         </div>
-        <div id="auth-box">
-            <input type="text" id="email" placeholder="Email" required/>
-            <input type="text" id="username" placeholder="Username" required/>
-            <input type="password" id="password" placeholder="Password" required/>
+
+        <div id="create-user-form">
+            <div id="auth-box">
+                <input type="text" id="email" placeholder="Email" required/>
+                <input type="text" id="username" placeholder="Username" required/>
+                <input type="password" id="password" placeholder="Password" required/>
+            </div>
+            <div id="basic-info">
+                <input type="text" id="fn" placeholder="First Name" required/>
+                <input type="text" id="ln" placeholder="Last Name"/>
+                <input type="number" id="year" step="1" placeholder="Birth Year" required/>
+                <input type="number" id="month" step="1" placeholder="Birth Month" min="1" max="12" required/>
+                <input type="number" id="day" step="1" placeholder="Birth Day" min="1" max="31" required/>
+            </div>
+            <div id="optional-info">
+                <input type="number" id="height" placeholder="Height in cms"/>
+                <input type="number" id="weight" placeholder="Weight in kgs"/>
+            </div>
         </div>
-        <div id="basic-info">
-            <input type="text" id="fn" placeholder="First Name" required/>
-            <input type="text" id="ln" placeholder="Last Name"/>
-            <input type="number" id="year" step="1" placeholder="Birth Year" required/>
-            <input type="number" id="month" step="1" placeholder="Birth Month" min="1" max="12" required/>
-            <input type="number" id="day" step="1" placeholder="Birth Day" min="1" max="31" required/>
-        </div>
-        <div id="optional-info">
-            <input type="number" id="height" placeholder="Height in cms"/>
-            <input type="number" id="weight" placeholder="Weight in kgs"/>
-        </div>
-        
+
         <script src="js/config.js"></script>
         <script src="js/createUserForm.js"></script>
 

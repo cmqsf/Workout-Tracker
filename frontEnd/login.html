@@ -5,24 +5,41 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Gruppo&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="/css/main-elements.css">
+        <link rel="stylesheet" href = "/css/header-elements.css">
+        <link rel="stylesheet" href = "/css/button-elements.css">
+        <link rel="stylesheet" href = "/css/form-elements.css">
     </head>
+    
     <body>
+        <header>
+            <a href="/" style="text-decoration: none; color: inherit">
+                <h1 id="home-header">Workout Tracker</h1>
+            </a>
+        </header>
         <div id="error-message" style="display:none; color:yellow;">
             Invalid username or password.
         </div>
-        <input type="text" id="username" placeholder="Username"/>
-        <input type="password" id="password" placeholder="Password"/>
-        <button onclick="handleLogin()">
-            Log In
-        </button>
+        <div id="login-box">
+            <input type="text" id="username" placeholder="Username"/>
+            <input type="password" id="password" placeholder="Password"/>
+            <button onclick="handleLogin()">
+                Log In
+            </button>
+        </div>
 
+        <script src="config.js"></script>
         <script>
             async function handleLogin() {
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
 
-                const response = await fetch ("/login", {
+                const response = await fetch (`${CONFIG.BASE_URL}/login`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({username, password})

@@ -48,6 +48,7 @@
                 if (response.ok) {
                     const data = await response.json();
                     localStorage.setItem("token", data.token); 
+                    localStorage.setItem("fn", data.fn)
                     window.location.href = "/";
                 } else {
                     document.getElementById("error-message").style.display = "block";
